@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Install and uninstall functions for the OpenBiz installation profile.
+ */
+
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\user\Entity\User;
+use Drupal\user\RoleInterface;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for Lightning Profile.
+ *
+ * @see system_install()
+ */
+function openbiz_install() {
+  // Restrict user registration to admin role creation.
+  \Drupal::configFactory()
+    ->getEditable('user.settings')
+    ->set('register', USER_REGISTER_ADMINISTRATORS_ONLY)
+    ->save(TRUE);
+}
